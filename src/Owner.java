@@ -1,37 +1,45 @@
 public class Owner {
-    // 1. PRIVATE FIELDS (minimum 4)
-    private Type field1;
-    private Type field2;
-    private Type field3;
-    private Type field4;
-    // 2. CONSTRUCTOR WITH PARAMETERS
-    public ClassName(Type field1, Type field2, Type field3, Type field4) {
-// TODO: Initialize all fields using "this" keyword
+    private int ownerId;
+    private String fullName;
+    private String phoneNum;
+    private String email;
+
+    public Owner(int ownerId, String fullName, String phoneNum, String email) {
+        this.ownerId = ownerId;
+        this.fullName = fullName;
+        this.phoneNum = phoneNum;
+        this.email = email;
     }
-    // 3. DEFAULT CONSTRUCTOR (optional)
-    public ClassName() {
-// TODO: Set default values
+
+    public int getOwnerId() {
+        return ownerId;
     }
-    // 4. GETTERS (one for each field)
-    public Type getField1() {
-// TODO: Return field1
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
-    // ... more getters
-// 5. SETTERS (one for each field)
-    public void setField1(Type field1) {
-// TODO: Use "this.field1 = field1"
+
+    public String getFullName() {
+        return fullName;
     }
-    // ... more setters
-// 6. ADDITIONAL METHODS (minimum 2)
-    public void methodName1() {
-// TODO: Add your logic here
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
-    public ReturnType methodName2() {
-// TODO: Add your logic here
+
+    public String getPhoneNum() {
+        return phoneNum;
     }
-    // 7. toString() METHOD
-    @Override
-    public String toString() {
-// TODO: Return string with all field values
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

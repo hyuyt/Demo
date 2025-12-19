@@ -1,37 +1,68 @@
+import java.time.LocalDate;
+
 public class Pet {
-    // 1. PRIVATE FIELDS (minimum 4)
-    private Type field1;
-    private Type field2;
-    private Type field3;
-    private Type field4;
-    // 2. CONSTRUCTOR WITH PARAMETERS
-    public ClassName(Type field1, Type field2, Type field3, Type field4) {
-// TODO: Initialize all fields using "this" keyword
+    private int petId;
+    private String name;
+    private String species;
+    private String breed;
+    private LocalDate birthDate;
+    private String medHistory;
+
+    public Pet(int petId, String name, String species, String breed, LocalDate birthDate, String medHistory) {
+        this.petId = petId;
+        this.name = name;
+        this.species = species;
+        this.breed = breed;
+        this.birthDate = birthDate;
+        this.medHistory = medHistory;
     }
-    // 3. DEFAULT CONSTRUCTOR (optional)
-    public ClassName() {
-// TODO: Set default values
+
+    public int getPetId() {
+        return petId;
     }
-    // 4. GETTERS (one for each field)
-    public Type getField1() {
-// TODO: Return field1
+
+    public void setPetId(int petId) {
+        this.petId = petId;
     }
-    // ... more getters
-// 5. SETTERS (one for each field)
-    public void setField1(Type field1) {
-// TODO: Use "this.field1 = field1"
+
+    public String getName() {
+        return name;
     }
-    // ... more setters
-// 6. ADDITIONAL METHODS (minimum 2)
-    public void methodName1() {
-// TODO: Add your logic here
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public ReturnType methodName2() {
-// TODO: Add your logic here
+
+    public String getSpecies() {
+        return species;
     }
-    // 7. toString() METHOD
-    @Override
-    public String toString() {
-// TODO: Return string with all field values
+
+    public void setSpecies(String species) {
+        this.species = species;
     }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getMedHistory() {
+        return medHistory;
+    }
+
+    public void setMedHistory(String medHistory) {
+        this.medHistory = medHistory;
+    }
+
 }

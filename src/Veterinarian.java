@@ -1,37 +1,45 @@
 public class Veterinarian {
-    // 1. PRIVATE FIELDS (minimum 4)
-    private Type field1;
-    private Type field2;
-    private Type field3;
-    private Type field4;
-    // 2. CONSTRUCTOR WITH PARAMETERS
-    public ClassName(Type field1, Type field2, Type field3, Type field4) {
-// TODO: Initialize all fields using "this" keyword
+    private int vetId;
+    private String fullName;
+    private String specialization;
+    private String phoneNum;
+
+    public Veterinarian(int vetId, String fullName, String specialization, String phoneNum) {
+        this.vetId = vetId;
+        this.fullName = fullName;
+        this.specialization = specialization;
+        this.phoneNum = phoneNum;
     }
-    // 3. DEFAULT CONSTRUCTOR (optional)
-    public ClassName() {
-// TODO: Set default values
+
+    public int getVetId() {
+        return vetId;
     }
-    // 4. GETTERS (one for each field)
-    public Type getField1() {
-// TODO: Return field1
+
+    public void setVetId(int vetId) {
+        this.vetId = vetId;
     }
-    // ... more getters
-// 5. SETTERS (one for each field)
-    public void setField1(Type field1) {
-// TODO: Use "this.field1 = field1"
+
+    public String getFullName() {
+        return fullName;
     }
-    // ... more setters
-// 6. ADDITIONAL METHODS (minimum 2)
-    public void methodName1() {
-// TODO: Add your logic here
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
-    public ReturnType methodName2() {
-// TODO: Add your logic here
+
+    public String getSpecialization() {
+        return specialization;
     }
-    // 7. toString() METHOD
-    @Override
-    public String toString() {
-// TODO: Return string with all field values
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }
