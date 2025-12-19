@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Appointment {
@@ -64,5 +65,28 @@ public class Appointment {
 
     public void setVetId(int vetId) {
         this.vetId = vetId;
+    }
+
+    public void cancelApp() {
+        status = "Cancelled";
+    }
+
+    public boolean isUpcoming() {
+        LocalDateTime appointmentDateTime =
+                LocalDateTime.of(appDate, appTime);
+        return appointmentDateTime.isAfter(LocalDateTime.now());
+    }
+
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appId=" + appId +
+                ", appDate=" + appDate +
+                ", appTime=" + appTime +
+                ", status='" + status + '\'' +
+                ", petId=" + petId +
+                ", vetId=" + vetId +
+                '}';
     }
 }

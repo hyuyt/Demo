@@ -64,4 +64,24 @@ public class Treatment {
     public void setVetId(int vetId) {
         this.vetId = vetId;
     }
+
+    public String getTreatmentSummary() {
+        return treatmentName + " on " + treatmentDate + " | Cost: $" + cost;
+    }
+
+    public boolean isExpensive() {
+        return cost > 100.0;   // threshold can be changed
+    }
+
+    @Override
+    public String toString() {
+        return "Treatment{" +
+                "treatmentId=" + treatmentId +
+                ", treatmentName='" + treatmentName + '\'' +
+                ", description='" + description + '\'' +
+                ", cost=" + cost +
+                ", treatmentDate=" + treatmentDate +
+                ", vetId=" + vetId +
+                '}';
+    }
 }

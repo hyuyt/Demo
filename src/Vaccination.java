@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Vaccination {
     private int vaccinationId;
@@ -63,5 +64,26 @@ public class Vaccination {
 
     public void setVetId(int vetId) {
         this.vetId = vetId;
+    }
+
+    public boolean isOverdue() {
+        return LocalDate.now().isAfter(nextDueDate);
+    }
+
+    // Method 2
+    public long daysUntilNextDose() {
+        return ChronoUnit.DAYS.between(LocalDate.now(), nextDueDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Vaccination{" +
+                "vaccinationId=" + vaccinationId +
+                ", vaccineName='" + vaccineName + '\'' +
+                ", dateGiven=" + dateGiven +
+                ", nextDueDate=" + nextDueDate +
+                ", petId=" + petId +
+                ", vetId=" + vetId +
+                '}';
     }
 }

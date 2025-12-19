@@ -42,4 +42,19 @@ public class Owner {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void contactUpdate(String Phone, String Email) {
+        phoneNum = Phone;
+        email = Email;
+    }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "ownerId=" + ownerId +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -42,4 +42,22 @@ public class Veterinarian {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+
+    public boolean hasSpecialization(String spec) {
+        return specialization.equalsIgnoreCase(spec);
+    }
+
+    public void updPhoneNum(String NewPhoneNum) {
+        phoneNum = NewPhoneNum;
+    }
+
+    @Override
+    public String toString() {
+        return "Veterinarian{" +
+                "vetId=" + vetId +
+                ", fullName='" + fullName + '\'' +
+                ", specialization='" + specialization + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
+                '}';
+    }
 }

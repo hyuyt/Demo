@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Pet {
     private int petId;
@@ -65,4 +66,23 @@ public class Pet {
         this.medHistory = medHistory;
     }
 
+    public int getAge(){
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    public void addMedRecord(String record) {
+        medHistory += "\n" + record;
+    }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "petId=" + petId +
+                ", name='" + name + '\'' +
+                ", species='" + species + '\'' +
+                ", breed='" + breed + '\'' +
+                ", birthDate=" + birthDate +
+                ", medHistory='" + medHistory + '\'' +
+                '}';
+    }
 }
