@@ -47,10 +47,6 @@ public class Veterinarian {
         return specialization.equalsIgnoreCase(spec);
     }
 
-    public void updPhoneNum(String NewPhoneNum) {
-        phoneNum = NewPhoneNum;
-    }
-
     @Override
     public String toString() {
         return "Veterinarian{" +

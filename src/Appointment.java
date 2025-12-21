@@ -72,6 +72,9 @@ public class Appointment {
     }
 
     public boolean isUpcoming() {
+        if("Cancelled".equalsIgnoreCase(status)) {
+            return false;
+        }
         LocalDateTime appointmentDateTime =
                 LocalDateTime.of(appDate, appTime);
         return appointmentDateTime.isAfter(LocalDateTime.now());

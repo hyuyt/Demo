@@ -4,14 +4,16 @@ import java.time.Period;
 public class Pet {
     private int petId;
     private String name;
+    int ownerId;
     private String species;
     private String breed;
     private LocalDate birthDate;
     private String medHistory;
 
-    public Pet(int petId, String name, String species, String breed, LocalDate birthDate, String medHistory) {
+    public Pet(int petId, String name, int ownerId, String species, String breed, LocalDate birthDate, String medHistory) {
         this.petId = petId;
         this.name = name;
+        this.ownerId = ownerId;
         this.species = species;
         this.breed = breed;
         this.birthDate = birthDate;
@@ -32,6 +34,14 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getSpecies() {
@@ -79,6 +89,7 @@ public class Pet {
         return "Pet{" +
                 "petId=" + petId +
                 ", name='" + name + '\'' +
+                ", ownerId=" + ownerId +
                 ", species='" + species + '\'' +
                 ", breed='" + breed + '\'' +
                 ", birthDate=" + birthDate +

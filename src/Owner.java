@@ -1,12 +1,16 @@
+import java.util.List;
+
 public class Owner {
     private int ownerId;
     private String fullName;
+    private List<Integer> pets;
     private String phoneNum;
     private String email;
 
-    public Owner(int ownerId, String fullName, String phoneNum, String email) {
+    public Owner(int ownerId, String fullName, List<Integer> pets, String phoneNum, String email) {
         this.ownerId = ownerId;
         this.fullName = fullName;
+        this.pets = pets;
         this.phoneNum = phoneNum;
         this.email = email;
     }
@@ -27,6 +31,14 @@ public class Owner {
         this.fullName = fullName;
     }
 
+    public List<Integer> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Integer> pets) {
+        this.pets = pets;
+    }
+
     public String getPhoneNum() {
         return phoneNum;
     }
@@ -43,9 +55,12 @@ public class Owner {
         this.email = email;
     }
 
-    public void contactUpdate(String Phone, String Email) {
-        phoneNum = Phone;
-        email = Email;
+    public void newPet(int petId) {
+        pets.add(petId);
+    }
+
+    public Integer petsSum() {
+        return pets.size();
     }
 
     @Override
@@ -53,6 +68,7 @@ public class Owner {
         return "Owner{" +
                 "ownerId=" + ownerId +
                 ", fullName='" + fullName + '\'' +
+                ", pets=" + pets +
                 ", phoneNum='" + phoneNum + '\'' +
                 ", email='" + email + '\'' +
                 '}';
