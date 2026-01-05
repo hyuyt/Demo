@@ -22,55 +22,85 @@ public class Vaccination {
         return vaccinationId;
     }
 
-    public void setVaccinationId(int vaccinationId) {
-        this.vaccinationId = vaccinationId;
-    }
-
     public String getVaccineName() {
         return vaccineName;
-    }
-
-    public void setVaccineName(String vaccineName) {
-        this.vaccineName = vaccineName;
     }
 
     public LocalDate getDateGiven() {
         return dateGiven;
     }
 
-    public void setDateGiven(LocalDate dateGiven) {
-        this.dateGiven = dateGiven;
-    }
-
     public LocalDate getNextDueDate() {
         return nextDueDate;
-    }
-
-    public void setNextDueDate(LocalDate nextDueDate) {
-        this.nextDueDate = nextDueDate;
     }
 
     public int getPetId() {
         return petId;
     }
 
-    public void setPetId(int petId) {
-        this.petId = petId;
-    }
-
     public int getVetId() {
         return vetId;
     }
 
-    public void setVetId(int vetId) {
-        this.vetId = vetId;
+    public void setVaccinationId(int vaccinationId) {
+        if (vaccinationId > 0) {
+            this.vaccinationId = vaccinationId;
+        } else {
+            System.out.println("Warning: Vaccination ID must be positive. Setting to 0.");
+            this.vaccinationId = 0;
+        }
     }
+
+    public void setVaccineName(String vaccineName) {
+        if (vaccineName != null && !vaccineName.trim().isEmpty()) {
+            this.vaccineName = vaccineName;
+        } else {
+            System.out.println("Warning: Vaccine name cannot be empty.");
+            this.vaccineName = "Unknown";
+        }
+    }
+
+    public void setDateGiven(LocalDate dateGiven) {
+        if (dateGiven != null) {
+            this.dateGiven = dateGiven;
+        } else {
+            System.out.println("Warning: Invalid vaccination date. Using today.");
+            this.dateGiven = LocalDate.now();
+        }
+    }
+
+    public void setNextDueDate(LocalDate nextDueDate) {
+        if (nextDueDate != null) {
+            this.nextDueDate = nextDueDate;
+        } else {
+            System.out.println("Warning: Invalid next due date. Using today.");
+            this.nextDueDate = LocalDate.now();
+        }
+    }
+
+    public void setPetId(int petId) {
+        if (petId > 0) {
+            this.petId = petId;
+        } else {
+            System.out.println("Warning: Pet ID must be positive. Setting to 0.");
+            this.petId = 0;
+        }
+    }
+
+    public void setVetId(int vetId) {
+        if (vetId > 0) {
+            this.vetId = vetId;
+        } else {
+            System.out.println("Warning: Vet ID must be positive. Setting to 0.");
+            this.vetId = 0;
+        }
+    }
+
 
     public boolean isOverdue() {
         return LocalDate.now().isAfter(nextDueDate);
     }
 
-    // Method 2
     public long daysUntilNextDose() {
         return ChronoUnit.DAYS.between(LocalDate.now(), nextDueDate);
     }

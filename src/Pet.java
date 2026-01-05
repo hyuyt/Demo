@@ -4,7 +4,7 @@ import java.time.Period;
 public class Pet {
     private int petId;
     private String name;
-    int ownerId;
+    private int ownerId;
     private String species;
     private String breed;
     private LocalDate birthDate;
@@ -24,56 +24,88 @@ public class Pet {
         return petId;
     }
 
-    public void setPetId(int petId) {
-        this.petId = petId;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public String getSpecies() {
         return species;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
     }
 
     public String getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getMedHistory() {
         return medHistory;
     }
 
+    public void setPetId(int petId) {
+        if (petId > 0) {
+            this.petId = petId;
+        } else {
+            System.out.println("Warning: Pet ID must be positive. Setting to 0.");
+            this.petId = 0;
+        }
+    }
+
+    public void setName(String name) {
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name;
+        } else {
+            System.out.println("Warning: Name cannot be empty.");
+            this.name = "Unknown";
+        }
+    }
+
+    public void setOwnerId(int ownerId) {
+        if (ownerId > 0) {
+            this.ownerId = ownerId;
+        } else {
+            System.out.println("Warning: Owner ID must be positive. Setting to 0.");
+            this.ownerId = 0;
+        }
+    }
+
+    public void setSpecies(String species) {
+        if (species != null && !species.trim().isEmpty()) {
+            this.species = species;
+        } else {
+            this.species = "Unknown";
+        }
+    }
+
+    public void setBreed(String breed) {
+        if (breed != null && !breed.trim().isEmpty()) {
+            this.breed = breed;
+        } else {
+            this.breed = "Unknown";
+        }
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        if (birthDate != null && !birthDate.isAfter(LocalDate.now())) {
+            this.birthDate = birthDate;
+        } else {
+            System.out.println("Warning: Invalid birth date. Using today.");
+            this.birthDate = LocalDate.now();
+        }
+    }
+
     public void setMedHistory(String medHistory) {
-        this.medHistory = medHistory;
+        if (medHistory != null) {
+            this.medHistory = medHistory;
+        } else {
+            this.medHistory = "";
+        }
     }
 
     public int getAge(){

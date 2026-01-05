@@ -21,48 +21,77 @@ public class Treatment {
         return treatmentId;
     }
 
-    public void setTreatmentId(int treatmentId) {
-        this.treatmentId = treatmentId;
-    }
-
     public String getTreatmentName() {
         return treatmentName;
-    }
-
-    public void setTreatmentName(String treatmentName) {
-        this.treatmentName = treatmentName;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getCost() {
         return cost;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
     }
 
     public LocalDate getTreatmentDate() {
         return treatmentDate;
     }
 
-    public void setTreatmentDate(LocalDate treatmentDate) {
-        this.treatmentDate = treatmentDate;
-    }
-
     public int getVetId() {
         return vetId;
     }
 
+    public void setTreatmentId(int treatmentId) {
+        if (treatmentId > 0) {
+            this.treatmentId = treatmentId;
+        } else {
+            System.out.println("Warning: Treatment ID must be positive. Setting to 0.");
+            this.treatmentId = 0;
+        }
+    }
+
+    public void setTreatmentName(String treatmentName) {
+        if (treatmentName != null && !treatmentName.trim().isEmpty()) {
+            this.treatmentName = treatmentName;
+        } else {
+            System.out.println("Warning: Treatment name cannot be empty.");
+            this.treatmentName = "Unknown";
+        }
+    }
+
+    public void setDescription(String description) {
+        if (description != null && !description.trim().isEmpty()) {
+            this.description = description;
+        } else {
+            this.description = "No description";
+        }
+    }
+
+    public void setCost(double cost) {
+        if (cost >= 0) {
+            this.cost = cost;
+        } else {
+            System.out.println("Warning: Cost cannot be negative! Setting to 0.");
+            this.cost = 0;
+        }
+    }
+
+    public void setTreatmentDate(LocalDate treatmentDate) {
+        if (treatmentDate != null) {
+            this.treatmentDate = treatmentDate;
+        } else {
+            System.out.println("Warning: Invalid treatment date. Using today.");
+            this.treatmentDate = LocalDate.now();
+        }
+    }
+
     public void setVetId(int vetId) {
-        this.vetId = vetId;
+        if (vetId > 0) {
+            this.vetId = vetId;
+        } else {
+            System.out.println("Warning: Vet ID must be positive. Setting to 0.");
+            this.vetId = 0;
+        }
     }
 
     public String getTreatmentSummary() {

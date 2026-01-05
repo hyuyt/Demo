@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Owner {
@@ -19,40 +20,63 @@ public class Owner {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public String getFullName() {
         return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public List<Integer> getPets() {
         return pets;
     }
 
-    public void setPets(List<Integer> pets) {
-        this.pets = pets;
-    }
-
     public String getPhoneNum() {
         return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setOwnerId(int ownerId) {
+        if (ownerId > 0) {
+            this.ownerId = ownerId;
+        } else {
+            System.out.println("Warning: Owner ID must be positive. Setting to 0.");
+            this.ownerId = 0;
+        }
+    }
+
+    public void setFullName(String fullName) {
+        if (fullName != null && !fullName.trim().isEmpty()) {
+            this.fullName = fullName;
+        } else {
+            System.out.println("Warning: Full name cannot be empty.");
+            this.fullName = "Unknown";
+        }
+    }
+
+    public void setPets(List<Integer> pets) {
+        if (pets != null) {
+            this.pets = pets;
+        } else {
+            this.pets = new ArrayList<>();
+        }
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        if (phoneNum != null && !phoneNum.trim().isEmpty()) {
+            this.phoneNum = phoneNum;
+        } else {
+            this.phoneNum = "N/A";
+        }
+    }
+
     public void setEmail(String email) {
-        this.email = email;
+        if (email != null && email.contains("@")) {
+            this.email = email;
+        } else {
+            System.out.println("Warning: Invalid email.");
+            this.email = "unknown@mail.com";
+        }
     }
 
     public void newPet(int petId) {

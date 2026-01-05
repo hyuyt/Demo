@@ -23,52 +23,24 @@ public class Appointment {
         return appId;
     }
 
-    public void setAppId(int appId) {
-        this.appId = appId;
-    }
-
     public LocalDate getAppDate() {
         return appDate;
-    }
-
-    public void setAppDate(LocalDate appDate) {
-        this.appDate = appDate;
     }
 
     public LocalTime getAppTime() {
         return appTime;
     }
 
-    public void setAppTime(LocalTime appTime) {
-        this.appTime = appTime;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getPetId() {
         return petId;
     }
 
-    public void setPetId(int petId) {
-        this.petId = petId;
-    }
-
     public int getVetId() {
         return vetId;
-    }
-
-    public void setVetId(int vetId) {
-        this.vetId = vetId;
-    }
-
-    public void cancelApp() {
-        status = "Cancelled";
     }
 
     public boolean isUpcoming() {
@@ -80,6 +52,54 @@ public class Appointment {
         return appointmentDateTime.isAfter(LocalDateTime.now());
     }
 
+    public void setAppId(int appId) {
+        if (appId > 0) {
+            this.appId = appId;
+        } else {
+            System.out.println("Warning: Invalid appointment ID.");
+            this.appId = 0;
+        }
+    }
+
+    public void setAppDate(LocalDate appDate) {
+        if (appDate != null) {
+            this.appDate = appDate;
+        } else {
+            this.appDate = LocalDate.now();
+        }
+    }
+
+    public void setAppTime(LocalTime appTime) {
+        if (appTime != null) {
+            this.appTime = appTime;
+        } else {
+            this.appTime = LocalTime.now();
+        }
+    }
+
+    public void setStatus(String status) {
+        if (status != null && !status.trim().isEmpty()) {
+            this.status = status;
+        } else {
+            this.status = "Scheduled";
+        }
+    }
+
+    public void setPetId(int petId) {
+        if (petId > 0) {
+            this.petId = petId;
+        } else {
+            this.petId = 0;
+        }
+    }
+
+    public void setVetId(int vetId) {
+        if (vetId > 0) {
+            this.vetId = vetId;
+        } else {
+            this.vetId = 0;
+        }
+    }
 
     @Override
     public String toString() {
