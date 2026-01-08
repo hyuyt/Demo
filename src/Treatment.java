@@ -1,20 +1,22 @@
 import java.time.LocalDate;
 
 public class Treatment {
-    private int treatmentId;
-    private String treatmentName;
-    private String description;
-    private double cost;
-    private LocalDate treatmentDate;
-    private int vetId;
 
-    public Treatment(int treatmentId, String treatmentName, String description, double cost, LocalDate treatmentDate, int vetId) {
-        this.treatmentId = treatmentId;
-        this.treatmentName = treatmentName;
-        this.description = description;
-        this.cost = cost;
-        this.treatmentDate = treatmentDate;
-        this.vetId = vetId;
+    protected int treatmentId;
+    protected String treatmentName;
+    protected String description;
+    protected double cost;
+    protected LocalDate treatmentDate;
+    protected int vetId;
+
+    public Treatment(int treatmentId, String treatmentName, String description,
+                     double cost, LocalDate treatmentDate, int vetId) {
+        setTreatmentId(treatmentId);
+        setTreatmentName(treatmentName);
+        setDescription(description);
+        setCost(cost);
+        setTreatmentDate(treatmentDate);
+        setVetId(vetId);
     }
 
     public int getTreatmentId() {
@@ -94,23 +96,23 @@ public class Treatment {
         }
     }
 
-    public String getTreatmentSummary() {
-        return treatmentName + " on " + treatmentDate + " | Cost: $" + cost;
+    public void performTreatment() {
+        System.out.println("Performing general treatment: " + treatmentName);
+    }
+
+    public String getType() {
+        return "General Treatment";
     }
 
     public boolean isExpensive() {
-        return cost > 100.0;   // threshold can be changed
+        return cost > 100.0;
     }
 
     @Override
     public String toString() {
-        return "Treatment{" +
-                "treatmentId=" + treatmentId +
-                ", treatmentName='" + treatmentName + '\'' +
-                ", description='" + description + '\'' +
-                ", cost=" + cost +
-                ", treatmentDate=" + treatmentDate +
-                ", vetId=" + vetId +
-                '}';
+        return "[" + getType() + "] " +
+                treatmentName +
+                " | Date: " + treatmentDate +
+                " | Cost: $" + cost;
     }
 }
