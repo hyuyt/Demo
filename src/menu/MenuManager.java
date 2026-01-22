@@ -14,7 +14,6 @@ public class MenuManager implements Menu {
         treatments = new ArrayList<>();
         scanner = new Scanner(System.in);
 
-        // Test data
         treatments.add(new Vaccination(
                 1, "Rabies Shot", "Rabies vaccine",
                 40, LocalDate.now(), 0,
@@ -26,7 +25,6 @@ public class MenuManager implements Menu {
                 "Neutering", 90));
     }
 
-    // ===== MENU =====
     @Override
     public void displayMenu() {
         System.out.println("""
@@ -46,7 +44,6 @@ public class MenuManager implements Menu {
         System.out.print("Enter choice: ");
     }
 
-    // ===== RUN =====
     @Override
     public void run() {
         boolean running = true;
@@ -67,17 +64,13 @@ public class MenuManager implements Menu {
                     case 0 -> running = false;
                     default -> System.out.println("Invalid option!");
                 }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a number!");
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
             }
-        }
+
         scanner.close();
     }
 
-    // ===== FUNCTIONS =====
     private void addTreatment() {
         System.out.println("\n--- ADD GENERAL TREATMENT ---");
 

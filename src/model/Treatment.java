@@ -1,8 +1,7 @@
 package model;
-
 import java.time.LocalDate;
 
-public abstract class Treatment implements Billable{
+public abstract class Treatment {
 
     protected int treatmentId;
     protected String treatmentName;
@@ -22,11 +21,10 @@ public abstract class Treatment implements Billable{
         setVetId(vetId);
     }
 
-    // 🔴 ABSTRACT METHODS (обязательно)
+
     public abstract void performTreatment();
     public abstract String getType();
 
-    // 🔴 SETTERS WITH EXCEPTIONS
     public void setTreatmentId(int treatmentId) {
         if (treatmentId <= 0)
             throw new IllegalArgumentException("Treatment ID must be positive");
@@ -66,82 +64,5 @@ public abstract class Treatment implements Billable{
     @Override
     public String toString() {
         return getType() + " | " + treatmentName + " | $" + cost;
-    }
-
-    @Override
-    public double calculateBill() {
-        return cost;
-    }
-
-    public static class Veterinarian {
-        private int vetId;
-        private String fullName;
-        private String specialization;
-        private String phoneNum;
-
-        public Veterinarian(int vetId, String fullName, String specialization, String phoneNum) {
-            this.vetId = vetId;
-            this.fullName = fullName;
-            this.specialization = specialization;
-            this.phoneNum = phoneNum;
-        }
-
-        public int getVetId() {
-            return vetId;
-        }
-
-        public String getFullName() {
-            return fullName;
-        }
-
-        public String getSpecialization() {
-            return specialization;
-        }
-
-        public String getPhoneNum() {
-            return phoneNum;
-        }
-
-        public void setVetId(int vetId) {
-            if (vetId <= 0) {
-                throw new IllegalArgumentException("Id should be positive!");
-            }
-            this.vetId = vetId;
-        }
-
-        public void setFullName(String fullName) {
-            if (fullName == null || fullName.trim().isEmpty()) {
-                throw new IllegalArgumentException("Full name cannot be empty");
-            }
-            this.fullName = fullName;
-        }
-
-        public void setSpecialization(String specialization) {
-            if (specialization == null || specialization.trim().isEmpty()) {
-                throw new IllegalArgumentException("Specialization cannot be empty");
-            }
-            this.specialization = specialization;
-        }
-
-        public void setPhoneNum(String phoneNum) {
-            if (phoneNum == null || phoneNum.trim().isEmpty()) {
-                throw new IllegalArgumentException("Phone number cannot be empty");
-            }
-            this.phoneNum = phoneNum;
-        }
-
-        public boolean hasSpecialization(String spec) {
-            return specialization.equalsIgnoreCase(spec);
-        }
-
-        @Override
-        public String toString() {
-            return "model.Treatment.Veterinarian{" +
-                    "vetId=" + vetId +
-                    ", fullName='" + fullName + '\'' +
-                    ", specialization='" + specialization + '\'' +
-                    ", phoneNum='" + phoneNum + '\'' +
-                    '}';
-        }
     }
 }
