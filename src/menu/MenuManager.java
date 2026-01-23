@@ -47,7 +47,6 @@ public class MenuManager implements Menu {
     @Override
     public void run() {
         boolean running = true;
-
         while (running) {
             displayMenu();
             try {
@@ -67,99 +66,114 @@ public class MenuManager implements Menu {
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
             }
-
+        }
         scanner.close();
     }
 
     private void addTreatment() {
         System.out.println("\n--- ADD GENERAL TREATMENT ---");
 
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("ID: ");
+            int id = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-        System.out.print("Description: ");
-        String desc = scanner.nextLine();
+            System.out.print("Description: ");
+            String desc = scanner.nextLine();
 
-        System.out.print("Cost: ");
-        double cost = Double.parseDouble(scanner.nextLine());
+            System.out.print("Cost: ");
+            double cost = Double.parseDouble(scanner.nextLine());
 
-        Treatment t = new Treatment(
-                id, name, desc, cost,
-                LocalDate.now(), 0) {
-            @Override
-            public void performTreatment() {
-                System.out.println("Performing general treatment");
-            }
+            Treatment t = new Treatment(
+                    id, name, desc, cost,
+                    LocalDate.now(), 0) {
+                @Override
+                public void performTreatment() {
+                    System.out.println("Performing general treatment");
+                }
 
-            @Override
-            public String getType() {
-                return "General Treatment";
-            }
-        };
+                @Override
+                public String getType() {
+                    return "General Treatment";
+                }
+            };
 
-        treatments.add(t);
-        System.out.println("Treatment added!");
+            treatments.add(t);
+            System.out.println("Treatment added!");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void addVaccination() {
         System.out.println("\n--- ADD VACCINATION ---");
 
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("ID: ");
+            int id = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-        System.out.print("Description: ");
-        String desc = scanner.nextLine();
+            System.out.print("Description: ");
+            String desc = scanner.nextLine();
 
-        System.out.print("Cost: ");
-        double cost = Double.parseDouble(scanner.nextLine());
+            System.out.print("Cost: ");
+            double cost = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Vaccine name: ");
-        String vaccine = scanner.nextLine();
+            System.out.print("Vaccine name: ");
+            String vaccine = scanner.nextLine();
 
-        System.out.print("Next due date (YYYY-MM-DD): ");
-        LocalDate nextDate = LocalDate.parse(scanner.nextLine());
+            System.out.print("Next due date (YYYY-MM-DD): ");
+            LocalDate nextDate = LocalDate.parse(scanner.nextLine());
 
-        treatments.add(new Vaccination(
-                id, name, desc, cost,
-                LocalDate.now(), 0,
-                vaccine, nextDate));
+            treatments.add(new Vaccination(
+                    id, name, desc, cost,
+                    LocalDate.now(), 0,
+                    vaccine, nextDate));
 
-        System.out.println("Vaccination added!");
+            System.out.println("Vaccination added!");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void addSurgery() {
         System.out.println("\n--- ADD SURGERY ---");
 
-        System.out.print("ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        try {
+            System.out.print("ID: ");
+            int id = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
 
-        System.out.print("Description: ");
-        String desc = scanner.nextLine();
+            System.out.print("Description: ");
+            String desc = scanner.nextLine();
 
-        System.out.print("Cost: ");
-        double cost = Double.parseDouble(scanner.nextLine());
+            System.out.print("Cost: ");
+            double cost = Double.parseDouble(scanner.nextLine());
 
-        System.out.print("Surgery type: ");
-        String type = scanner.nextLine();
+            System.out.print("Surgery type: ");
+            String type = scanner.nextLine();
 
-        System.out.print("Duration (minutes): ");
-        int duration = Integer.parseInt(scanner.nextLine());
+            System.out.print("Duration (minutes): ");
+            int duration = Integer.parseInt(scanner.nextLine());
 
-        treatments.add(new Surgery(
-                id, name, desc, cost,
-                LocalDate.now(), 0,
-                type, duration));
+            treatments.add(new Surgery(
+                    id, name, desc, cost,
+                    LocalDate.now(), 0,
+                    type, duration));
 
-        System.out.println("Surgery added!");
+            System.out.println("Surgery added!");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void viewAll() {

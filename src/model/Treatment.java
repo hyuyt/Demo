@@ -1,7 +1,7 @@
 package model;
 import java.time.LocalDate;
 
-public abstract class Treatment {
+public abstract class Treatment implements Billable {
 
     protected int treatmentId;
     protected String treatmentName;
@@ -21,6 +21,29 @@ public abstract class Treatment {
         setVetId(vetId);
     }
 
+    public int getTreatmentId() {
+        return treatmentId;
+    }
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public LocalDate getTreatmentDate() {
+        return treatmentDate;
+    }
+
+    public int getVetId() {
+        return vetId;
+    }
 
     public abstract void performTreatment();
     public abstract String getType();
@@ -64,5 +87,10 @@ public abstract class Treatment {
     @Override
     public String toString() {
         return getType() + " | " + treatmentName + " | $" + cost;
+    }
+
+    @Override
+    public double calculateBill(){
+        return cost;
     }
 }
