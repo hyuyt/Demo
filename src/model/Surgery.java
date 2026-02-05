@@ -26,4 +26,13 @@ public class Surgery extends Treatment {
     public String getType() {
         return "Surgery";
     }
+
+    public String getSurgeryType() {
+        return surgeryType;
+    }
+
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
+
 }

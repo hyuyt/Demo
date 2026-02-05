@@ -1,8 +1,10 @@
 package menu;
 
+import database.TreatmentDAO;
 import model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuManager implements Menu {
@@ -28,19 +30,19 @@ public class MenuManager implements Menu {
     @Override
     public void displayMenu() {
         System.out.println("""
-        ========================================
-           VET CLINIC TREATMENT SYSTEM
-        ========================================
-        1. Add General Treatment
-        2. Add Vaccination
-        3. Add Surgery
-        4. View All Treatments
-        5. Demonstrate Polymorphism
-        6. View Vaccinations Only
-        7. View Surgeries Only
-        0. Exit
-        ========================================
-        """);
+                ========================================
+                   VET CLINIC TREATMENT SYSTEM
+                ========================================
+                1. Add General Treatment
+                2. Add Vaccination
+                3. Add Surgery
+                4. View All Treatments
+                5. Demonstrate Polymorphism
+                6. View Vaccinations Only
+                7. View Surgeries Only
+                0. Exit
+                ========================================
+                """);
         System.out.print("Enter choice: ");
     }
 
@@ -143,31 +145,29 @@ public class MenuManager implements Menu {
     }
 
     private void addSurgery() {
-        System.out.println("\n--- ADD SURGERY ---");
-
         try {
-            System.out.print("ID: ");
+            System.out.print("Enter ID: ");
             int id = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Name: ");
+            System.out.print("Enter name: ");
             String name = scanner.nextLine();
 
             System.out.print("Description: ");
-            String desc = scanner.nextLine();
+            String description = scanner.nextLine();
 
-            System.out.print("Cost: ");
+            System.out.print("Enter cost: ");
             double cost = Double.parseDouble(scanner.nextLine());
 
-            System.out.print("Surgery type: ");
-            String type = scanner.nextLine();
+            System.out.print("Enter surgery name: ");
+            String surgeryName = scanner.nextLine();
 
-            System.out.print("Duration (minutes): ");
+            System.out.print("Enter duration (minutes): ");
             int duration = Integer.parseInt(scanner.nextLine());
 
             treatments.add(new Surgery(
-                    id, name, desc, cost,
+                    id, name, description, cost,
                     LocalDate.now(), 0,
-                    type, duration));
+                    surgeryName, duration));
 
             System.out.println("Surgery added!");
 
@@ -175,6 +175,7 @@ public class MenuManager implements Menu {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     private void viewAll() {
         System.out.println("\n--- ALL TREATMENTS ---");
@@ -200,11 +201,181 @@ public class MenuManager implements Menu {
     }
 
     private void viewSurgeries() {
-        System.out.println("\n--- SURGERIES ONLY ---");
         for (Treatment t : treatments) {
             if (t instanceof Surgery) {
                 System.out.println(t);
             }
         }
     }
+
+    private void updateTreatment() {
+
+        System.out.print("Enter Treatment ID to update: ");
+        int treatmentId = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        Treatment existingTreatment = TreatmentDAO.getTreatmentById(treatmentId);
+
+        if (existingTreatment == null) {
+            System.out.println("❌ No treatment found with ID: " + treatmentId);
+            return;
+        }
+
+        System.out.println("\nCurrent Treatment Info:");
+        System.out.println(existingTreatment);
+
+        System.out.print("New Name [" + existingTreatment.getTreatmentName() + "]: ");
+        String newName = scanner.nextLine();
+        if (newName.trim().isEmpty()) {
+            newName = existingTreatment.getTreatmentName();
+        }
+
+        System.out.print("New Cost [" + existingTreatment.getCost() + "]: ");
+        String costInput = scanner.nextLine();
+        double newCost = costInput.trim().isEmpty()
+                ? existingTreatment.getCost()
+                : Double.parseDouble(costInput);
+
+        if (existingTreatment instanceof Surgery surgery) {
+
+            System.out.print("New Surgery Type [" + surgery.getSurgeryType() + "]: ");
+            String newType = scanner.nextLine();
+            if (newType.trim().isEmpty()) {
+                newType = surgery.getSurgeryType();
+            }
+
+            System.out.print("New Duration [" + surgery.getDurationMinutes() + "]: ");
+            String durationInput = scanner.nextLine();
+            int newDuration = durationInput.trim().isEmpty()
+                    ? surgery.getDurationMinutes()
+                    : Integer.parseInt(durationInput);
+
+            Surgery updatedSurgery = new Surgery(
+                    treatmentId,
+                    newName,
+                    surgery.getDescription(),
+                    newCost,
+                    surgery.getTreatmentDate(),
+                    surgery.getVetId(),
+                    newType,
+                    newDuration
+            );
+
+            boolean success = TreatmentDAO.updateSurgery(updatedSurgery);
+            System.out.println(success ? "✅ Surgery updated!" : "❌ Update failed");
+        }
+
+        else if (existingTreatment instanceof Vaccination vaccination) {
+
+            System.out.print("New Vaccine Name [" + vaccination.getVaccineName() + "]: ");
+            String newVaccine = scanner.nextLine();
+            if (newVaccine.trim().isEmpty()) {
+                newVaccine = vaccination.getVaccineName();
+            }
+
+            Vaccination updatedVaccination = new Vaccination(
+                    treatmentId,
+                    newName,
+                    vaccination.getDescription(),
+                    newCost,
+                    vaccination.getTreatmentDate(),
+                    vaccination.getVetId(),
+                    newVaccine,
+                    vaccination.getNextDueDate()
+            );
+
+            boolean success = TreatmentDAO.updateVaccination(updatedVaccination);
+            System.out.println(success ? "✅ Vaccination updated!" : "❌ Update failed");
+        }
+    }
+
+    private void deleteTreatment() {
+
+        System.out.print("Enter Treatment ID to delete: ");
+        int treatmentId = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        // 1. Load treatment from database
+        Treatment treatment = TreatmentDAO.getTreatmentById(treatmentId);
+
+        if (treatment == null) {
+            System.out.println("❌ No treatment found with ID: " + treatmentId);
+            return;
+        }
+
+        // 2. Show what will be deleted
+        System.out.println("\nTreatment to be deleted:");
+        System.out.println(treatment);
+
+        // 3. Ask for confirmation
+        System.out.print("⚠️ Are you sure? (yes/no): ");
+        String confirmation = scanner.nextLine();
+
+        // 4. Delete only if confirmed
+        if (confirmation.equalsIgnoreCase("yes")) {
+            boolean success = TreatmentDAO.deleteTreatment(treatmentId);
+            if (success) {
+                System.out.println("✅ Deletion completed.");
+            }
+        } else {
+            System.out.println("❌ Deletion cancelled.");
+        }
+    }
+
+    private void searchTreatmentByName() {
+
+        System.out.print("Enter treatment name to search: ");
+        String name = scanner.nextLine();
+
+        List<Treatment> results = TreatmentDAO.searchByName(name);
+
+        if (results.isEmpty()) {
+            System.out.println("⚠️ No treatments found.");
+        } else {
+            System.out.println("\nSearch Results:");
+            for (Treatment t : results) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    private void searchTreatmentByCost() {
+
+        System.out.print("Enter minimum cost: ");
+        double min = scanner.nextDouble();
+
+        System.out.print("Enter maximum cost: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine(); // clear buffer
+
+        List<Treatment> results = TreatmentDAO.searchByCostRange(min, max);
+
+        if (results.isEmpty()) {
+            System.out.println("⚠️ No treatments found in this range.");
+        } else {
+            System.out.println("\nSearch Results:");
+            for (Treatment t : results) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    private void searchTreatmentByMinCost() {
+
+        System.out.print("Enter minimum cost: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
+
+        List<Treatment> results = TreatmentDAO.searchByMinCost(min);
+
+        if (results.isEmpty()) {
+            System.out.println("⚠️ No treatments found.");
+        } else {
+            System.out.println("\nTreatments costing at least " + min + ":");
+            for (Treatment t : results) {
+                System.out.println(t);
+            }
+        }
+    }
+
 }

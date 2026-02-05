@@ -16,6 +16,15 @@ public class Vaccination extends Treatment {
         this.nextDueDate = nextDueDate;
     }
 
+    public String getVaccineName() {
+        return vaccineName;
+    }
+
+    public LocalDate getNextDueDate() {
+        return nextDueDate;
+    }
+
+
     @Override
     public void performTreatment() {
         System.out.println("Vaccinating with " + vaccineName +
