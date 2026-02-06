@@ -4,7 +4,7 @@ import model.Surgery;
 import model.Treatment;
 import model.Vaccination;
 
-import java.sql.*
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +56,90 @@ public class TreatmentDAO {
         } finally {
             DatabaseConnection.closeConnection(connection);
         }
+    }
+
+    public boolean insertVaccination(Vaccination v) {
+
+        String sql = """
+    INSERT INTO treatment
+    (t_id, name, description, cost, date, v_id,
+     treatment_type, vaccine_name, next_due_date)
+    VALUES (?, ?, ?, ?, ?, ?, 'VACCINATION', ?, ?)
+    """;
+
+        Connection connection = DatabaseConnection.getConnection();
+        if (connection == null) return false;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, v.getTreatmentId());
+            statement.setString(2, v.getTreatmentName());
+            statement.setString(3, v.getDescription());
+            statement.setDouble(4, v.getCost());
+            statement.setDate(5, Date.valueOf(v.getTreatmentDate()));
+            statement.setInt(6, v.getVetId());
+            statement.setString(7, v.getVaccineName());
+            statement.setDate(8, Date.valueOf(v.getNextDueDate()));
+
+            int rows = statement.executeUpdate();
+            statement.close();
+
+            if (rows > 0) {
+                System.out.println("✅ Vaccination inserted!");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Insert vaccination failed!");
+            e.printStackTrace();
+        } finally {
+            DatabaseConnection.closeConnection(connection);
+        }
+
+        return false;
+    }
+
+    public boolean insertSurgery(Surgery s) {
+
+        String sql = """
+    INSERT INTO treatment
+    (t_id, name, description, cost, date, v_id,
+     treatment_type, surgery_type, duration_minutes)
+    VALUES (?, ?, ?, ?, ?, ?, 'SURGERY', ?, ?)
+    """;
+
+        Connection connection = DatabaseConnection.getConnection();
+        if (connection == null) return false;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, s.getTreatmentId());
+            statement.setString(2, s.getTreatmentName());
+            statement.setString(3, s.getDescription());
+            statement.setDouble(4, s.getCost());
+            statement.setDate(5, Date.valueOf(s.getTreatmentDate()));
+            statement.setInt(6, s.getVetId());
+            statement.setString(7, s.getSurgeryType());
+            statement.setInt(8, s.getDurationMinutes());
+
+            int rows = statement.executeUpdate();
+            statement.close();
+
+            if (rows > 0) {
+                System.out.println("✅ Surgery inserted!");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Insert surgery failed!");
+            e.printStackTrace();
+        } finally {
+            DatabaseConnection.closeConnection(connection);
+        }
+
+        return false;
     }
 
     public List<Treatment> getAllTreatments() {
